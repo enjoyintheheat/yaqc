@@ -2,9 +2,26 @@ import asyncio
 import zmq
 import zmq.asyncio
 from contextlib import suppress
+from weakref import WeakSet
 
 
 ctx = zmq.asyncio.Context()
+
+
+class SubscribeController:
+    def __init__(self):
+        self.sockets = {}
+
+    def acquire_socket(topic='main', ip_addr='*', port='5555'):
+        sock = ctx.socket(zmq.SUB)
+        address = f'{ip_addr}:{port}'
+        sock.connect(f'tcp://{address}')
+        sock.setsockopt_string(zmq.SUBSCRIBE, topic)
+        self.sockets.setdefault(topic, [])
+        if self.sockets[topic].get()
+        sock_struct = {f'{address}': sock}
+        self.sockets[topic].append(sock_struct)
+
 
 
 class PipelineController:
