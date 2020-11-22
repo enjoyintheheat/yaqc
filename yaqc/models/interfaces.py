@@ -1,16 +1,17 @@
-import abc
+from abc import ABCMeta, abstractmethod
 
 
-class SocketZMQ(metaclass=abc.ABCMeta):
+class ISocketZMQ(metaclass=ABCMeta):
     def __init__(self, ip_addr='*', port='5555'):
         self.ip_addr = ip_addr
         self.port = port
 
-    @abc.abstractmethod
+    @staticmethod
+    @abstractmethod
     def acquire(self):
         '''Acquire ZeroMQ socket'''
 
-    @abc.abstractmethod
+    @abstractmethod
     def release(self):
         '''Release ZeroMQ socket'''
 

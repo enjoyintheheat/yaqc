@@ -1,14 +1,14 @@
 import zmq
 import zmq.asyncio
-from .socket import SocketZMQ
+from .interfaces import ISocketZMQ
 
 
 ctx = zmq.asyncio.Context()
 
 
-class RequestZMQ(SocketZMQ):
+class RequestZMQ(ISocketZMQ):
     def __init__(self, ip_addr='127.0.0.1', port='5555'):
-        super(RequestZMQ, self).__init__(ip_addr, port)
+        super().__init__(ip_addr, port)
         self._socket = RequestZMQ.acquire()
 
     async def __aenter__(self):
@@ -21,7 +21,6 @@ class RequestZMQ(SocketZMQ):
     def __repr__(self):
         return f'<REQ:{self.address}>'
 
-    @staticmethod
     def acquire():
         return ctx.socket(zmq.REQ)
 
@@ -32,7 +31,7 @@ class RequestZMQ(SocketZMQ):
 
 class ResponseZMQ(SocketZMQ):
     def __init__(self, ip_addr='127.0.0.1', port='5555'):
-        super(ResponseZMQ, self).__init__(ip_addr, port)
+        super().__init__(ip_addr, port)
         self._socket = ResponseZMQ.acquire()
 
     async def __aenter__(self):
@@ -45,7 +44,6 @@ class ResponseZMQ(SocketZMQ):
     def __repr__(self):
         return f'<REP:{self.binded_addr}>'
 
-    @staticmethod
     def acquire():
         return ctx.socket(zmq.REP)
 
