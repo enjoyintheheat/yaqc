@@ -1,4 +1,9 @@
+from abc import ABC, abstractmethod
 from asyncio import Queue
+
+class IController(ABC):
+    pass
+
 
 class Controller:
     def __init__(self, max_size=100):
