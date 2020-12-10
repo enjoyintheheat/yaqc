@@ -33,6 +33,8 @@ async def main():
 if __name__ == '__main__':
     try:
         print('Starting listen TCP SUB socket on localhost:5555')
+        one_req = RequestZMQ()
+        one_res = ResponseZMQ()
         asyncio.run(main())
     except KeyboardInterrupt:
         print('Finishing...')

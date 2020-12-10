@@ -7,7 +7,6 @@ class ISocketZMQ(ABC):
         self.ip_addr = ip_addr
         self.port = port
 
-    @staticmethod
     @abstractmethod
     def acquire(self):
         '''Acquire ZeroMQ socket'''
