@@ -1,13 +1,18 @@
 from abc import ABC, abstractmethod
-from asyncio import Queue
 
 class IController(ABC):
-    pass
+    @abstractmethod
+    async def put(self, elem):
+        '''Put method for async queue object'''
+
+    @abstractmethod
+    async def get(self):
+        '''Get method for async queue object'''
 
 
-class Controller:
-    def __init__(self, max_size=100):
-        self._queue = Queue(maxsize=max_size)
+class Controller(IController):
+    def __init__(self, queue):
+        self._queue = queue
 
     async def put(self, elem):
         await self._queue.put(elem)
