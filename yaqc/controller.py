@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class IController(ABC):
+class IQueueController(ABC):
     @abstractmethod
     async def put(self, elem):
         '''Put method for async queue object'''
@@ -10,7 +10,15 @@ class IController(ABC):
         '''Get method for async queue object'''
 
 
-class Controller(IController):
+'''
+TODO:
+- Queue class wrapper, that controls usage of async queue and:
+    -) Notify about fullness
+    -) Callback on_delete for queue instance
+'''
+
+
+class QueueController(IController):
     def __init__(self, queue):
         self._queue = queue
 

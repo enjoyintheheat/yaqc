@@ -1,6 +1,11 @@
 from abc import ABC, abstractmethod
 from enum import Enum, unique
 
+'''
+TODO:
+- Reconnection func
+'''
+
 
 class ISocketZMQ(ABC):
     def __init__(self, ip_addr='*', port='5555'):
